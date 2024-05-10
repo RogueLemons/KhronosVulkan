@@ -136,12 +136,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FirstApp.cpp" />
+    <ClCompile Include="VulkanEnginePipeline.cpp" />
     <ClCompile Include="VulkanEngineWindow.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="VulkanEnginePipeline.h" />
     <ClInclude Include="VulkanEngineWindow.h" />
     <ClInclude Include="FirstApp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\compile.bat" />
+    <None Include="shaders\simple_shader.frag" />
+    <None Include="shaders\simple_shader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
