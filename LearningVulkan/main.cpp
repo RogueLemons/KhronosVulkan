@@ -1,15 +1,17 @@
-
 #include <iostream>
 #include <stdexcept>
 
+#include "FirstApp.h"
+
 int main() {
+    FirstApp app;
     try {
 
-        // Run main
+        app.run();
 
     }
     catch (const std::exception& e) {
-        std::cout << e.what() << std::endl;
+        std::cerr << e.what() << std::endl;
         return 1;
     }
     return 0;
