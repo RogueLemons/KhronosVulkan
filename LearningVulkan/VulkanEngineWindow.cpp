@@ -1,4 +1,4 @@
-#include "EngineWindow.h"
+#include "VulkanEngineWindow.h"
 
 VulkanEngineWindow::VulkanEngineWindow(int width, int height, std::string name) 
 	: _width(width), _height(height), _windowName(name)
