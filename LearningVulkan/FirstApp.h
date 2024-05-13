@@ -1,6 +1,6 @@
 #pragma once
-#include "VulkanEngineWindow.h"
-#include "VulkanEnginePipeline.h"
+#include "LVE_Window.h"
+#include "LVE_Pipeline.h"
 
 class FirstApp {
 public:
@@ -10,8 +10,8 @@ public:
 	void run();
 
 private:
-	VulkanEngineWindow _veWindow{ WIDTH, HEIGHT, "Hello Vulkan!" };
+	LVE::VulkanEngineWindow _veWindow{ WIDTH, HEIGHT, "Hello Vulkan!" };
 
 	// These paths only work when debugging
-	VulkanEnginePipeline _vePipeline{"shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv" };
+	LVE::VulkanEnginePipeline _vePipeline{"shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv" };
 };

@@ -136,13 +136,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FirstApp.cpp" />
-    <ClCompile Include="VulkanEnginePipeline.cpp" />
-    <ClCompile Include="VulkanEngineWindow.cpp" />
+    <ClCompile Include="LVE_Device.cpp" />
+    <ClCompile Include="LVE_Pipeline.cpp" />
+    <ClCompile Include="LVE_Window.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="VulkanEnginePipeline.h" />
-    <ClInclude Include="VulkanEngineWindow.h" />
+    <ClInclude Include="LVE_Device.h" />
+    <ClInclude Include="LVE_Pipeline.h" />
+    <ClInclude Include="LVE_Window.h" />
     <ClInclude Include="FirstApp.h" />
   </ItemGroup>
   <ItemGroup>
