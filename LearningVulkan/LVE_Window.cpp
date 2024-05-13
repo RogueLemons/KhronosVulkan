@@ -1,4 +1,5 @@
 #include "LVE_Window.h"
+#include <stdexcept>
 
 namespace LVE {
 
@@ -12,6 +13,13 @@ namespace LVE {
 	{
 		glfwDestroyWindow(_window);
 		glfwTerminate();
+	}
+
+	void VE_Window::createWindowSurface(VkInstance instance, VkSurfaceKHR* surface)
+	{
+		if (glfwCreateWindowSurface(instance, _window, nullptr, surface) != VK_SUCCESS) {
+			throw std::runtime_error("Failed to create window surface.");
+		}
 	}
 
 	void VE_Window::initWindow()

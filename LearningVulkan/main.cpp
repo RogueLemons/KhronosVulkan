@@ -1,7 +1,6 @@
+#include "FirstApp.h"
 #include <iostream>
 #include <stdexcept>
-
-#include "FirstApp.h"
 
 // VE - VulkanEngine
 // LVE - LittleVulkanEngine

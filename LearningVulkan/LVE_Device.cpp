@@ -1,5 +1,4 @@
 #include "LVE_Device.h"
-
 // std headers
 #include <cstring>
 #include <iostream>

@@ -1,7 +1,5 @@
 #pragma once
-
 #include "LVE_Window.h"
-
 // std lib headers
 #include <string>
 #include <vector>
