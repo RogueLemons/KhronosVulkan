@@ -1,5 +1,4 @@
 #include "LVE_Pipeline.h"
-
 #include <fstream>
 #include <stdexcept>
 #include <iostream>

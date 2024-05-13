@@ -1,4 +1,5 @@
 #pragma once
+#include "LVE_Device.h"
 #include <string>
 #include <vector>
 
