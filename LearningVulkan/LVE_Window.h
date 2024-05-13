@@ -6,15 +6,16 @@
 
 namespace LVE {
 
-	class VulkanEngineWindow
+	class VE_Window
 	{
 	public:
-		VulkanEngineWindow(int width, int height, std::string name);
-		~VulkanEngineWindow();
-		VulkanEngineWindow(const VulkanEngineWindow&) = delete;
-		VulkanEngineWindow& operator= (const VulkanEngineWindow&) = delete;
+		VE_Window(int width, int height, std::string name);
+		~VE_Window();
+		VE_Window(const VE_Window&) = delete;
+		VE_Window& operator= (const VE_Window&) = delete;
 
 		bool shouldClose() { return glfwWindowShouldClose(_window); }
+		void createWindowSurface(VkInstance instance, VkSurfaceKHR* surface);
 	private:
 		GLFWwindow* _window;
 		std::string _windowName;

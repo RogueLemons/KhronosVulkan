@@ -6,12 +6,12 @@
 
 namespace LVE {
 
-    VulkanEnginePipeline::VulkanEnginePipeline(const std::string& vertFilepath, const std::string& fragFilepath)
+    VE_Pipeline::VE_Pipeline(const std::string& vertFilepath, const std::string& fragFilepath)
     {
         createGraphicsPipeline(vertFilepath, fragFilepath);
     }
 
-    std::vector<char> VulkanEnginePipeline::readFile(const std::string& filepath)
+    std::vector<char> VE_Pipeline::readFile(const std::string& filepath)
     {
         std::ifstream file(filepath, std::ios::ate | std::ios::binary);
         if (!file.is_open()) {
@@ -27,7 +27,7 @@ namespace LVE {
         return buffer;
     }
 
-    void VulkanEnginePipeline::createGraphicsPipeline(const std::string& vertFilepath, const std::string& fragFilepath)
+    void VE_Pipeline::createGraphicsPipeline(const std::string& vertFilepath, const std::string& fragFilepath)
     {
         auto vertCode = readFile(vertFilepath);
         auto fragCode = readFile(fragFilepath);

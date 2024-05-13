@@ -2,19 +2,19 @@
 
 namespace LVE {
 
-	VulkanEngineWindow::VulkanEngineWindow(int width, int height, std::string name)
+	VE_Window::VE_Window(int width, int height, std::string name)
 		: _width(width), _height(height), _windowName(name)
 	{
 		initWindow();
 	}
 
-	VulkanEngineWindow::~VulkanEngineWindow()
+	VE_Window::~VE_Window()
 	{
 		glfwDestroyWindow(_window);
 		glfwTerminate();
 	}
 
-	void VulkanEngineWindow::initWindow()
+	void VE_Window::initWindow()
 	{
 		glfwInit();
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);

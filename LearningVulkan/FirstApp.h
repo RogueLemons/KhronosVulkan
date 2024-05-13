@@ -10,8 +10,8 @@ public:
 	void run();
 
 private:
-	LVE::VulkanEngineWindow _veWindow{ WIDTH, HEIGHT, "Hello Vulkan!" };
+	LVE::VE_Window _veWindow{ WIDTH, HEIGHT, "Hello Vulkan!" };
 
 	// These paths only work when debugging
-	LVE::VulkanEnginePipeline _vePipeline{"shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv" };
+	LVE::VE_Pipeline _vePipeline{"shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv" };
 };
