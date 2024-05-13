@@ -3,6 +3,8 @@
 
 #include "FirstApp.h"
 
+// VE - VulkanEngine
+// LVE - LittleVulkanEngine
 int main() {
     FirstApp app;
     try {

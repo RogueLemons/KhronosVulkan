@@ -22,7 +22,7 @@ namespace LVE {
         bool isComplete() { return graphicsFamilyHasValue && presentFamilyHasValue; }
     };
 
-    class MyEngineDevice {
+    class VE_Device {
     public:
 #ifdef NDEBUG
         const bool enableValidationLayers = false;
@@ -30,14 +30,14 @@ namespace LVE {
         const bool enableValidationLayers = true;
 #endif
 
-        MyEngineDevice(VulkanEngineWindow& window);
-        ~MyEngineDevice();
+        VE_Device(VE_Window& window);
+        ~VE_Device();
 
         // Not copyable or movable
-        MyEngineDevice(const MyEngineDevice&) = delete;
-        void operator=(const MyEngineDevice&) = delete;
-        MyEngineDevice(MyEngineDevice&&) = delete;
-        MyEngineDevice& operator=(MyEngineDevice&&) = delete;
+        VE_Device(const VE_Device&) = delete;
+        void operator=(const VE_Device&) = delete;
+        VE_Device(VE_Device&&) = delete;
+        VE_Device& operator=(VE_Device&&) = delete;
 
         VkCommandPool getCommandPool() { return commandPool; }
         VkDevice device() { return device_; }
@@ -93,7 +93,7 @@ namespace LVE {
         VkInstance instance;
         VkDebugUtilsMessengerEXT debugMessenger;
         VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-        VulkanEngineWindow& window;
+        VE_Window& window;
         VkCommandPool commandPool;
 
         VkDevice device_;
