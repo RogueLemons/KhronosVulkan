@@ -1,8 +1,12 @@
 #include "FirstApp.h"
 
-void FirstApp::run()
-{
-	while (!_veWindow.shouldClose()) {
-		glfwPollEvents();
+namespace LVE {
+
+	void FirstApp::run()
+	{
+		while (!_veWindow.shouldClose()) {
+			glfwPollEvents();
+		}
 	}
+
 }
