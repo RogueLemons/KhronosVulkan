@@ -1,17 +1,23 @@
 #pragma once
 #include "LVE_Window.h"
 #include "LVE_Pipeline.h"
+#include "LVE_Device.h"
 
-class FirstApp {
-public:
-	static constexpr int WIDTH = 800;
-	static constexpr int HEIGHT = 600;
+namespace LVE {
 
-	void run();
+	class FirstApp {
+	public:
+		static constexpr int WIDTH = 800;
+		static constexpr int HEIGHT = 600;
 
-private:
-	LVE::VE_Window _veWindow{ WIDTH, HEIGHT, "Hello Vulkan!" };
+		void run();
 
-	// These paths only work when debugging
-	LVE::VE_Pipeline _vePipeline{"shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv" };
-};
+	private:
+		VE_Window _veWindow{ WIDTH, HEIGHT, "Hello Vulkan!" };
+		VE_Device _veDevice{ _veWindow };
+
+		// These paths only work when debugging
+		VE_Pipeline _vePipeline{ _veDevice, "shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv", VE_Pipeline::defaultPiplelineConfigInfo(WIDTH, HEIGHT) };
+	};
+
+}

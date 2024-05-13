@@ -5,7 +5,7 @@
 // VE - VulkanEngine
 // LVE - LittleVulkanEngine
 int main() {
-    FirstApp app;
+    LVE::FirstApp app;
     try {
 
         app.run();
