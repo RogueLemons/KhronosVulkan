@@ -17,7 +17,7 @@ namespace LVE {
 		VE_Device _veDevice{ _veWindow };
 
 		// These paths only work when debugging
-		VE_Pipeline _vePipeline{ _veDevice, "shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv", VE_Pipeline::defaultPiplelineConfigInfo(WIDTH, HEIGHT) };
+		VE_Pipeline _vePipeline{ _veDevice, "shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv", VE_Pipeline::defaultPipelineConfigInfo(WIDTH, HEIGHT) };
 	};
 
 }
