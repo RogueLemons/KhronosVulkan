@@ -6,6 +6,18 @@
 namespace LVE {
 
 	struct PipelineConfigInfo {
+		VkViewport viewport;
+		VkRect2D scissor;
+		VkPipelineViewportStateCreateInfo viewportInfo;
+		VkPipelineInputAssemblyStateCreateInfo inputAssemblyInfo;
+		VkPipelineRasterizationStateCreateInfo rasterizationInfo;
+		VkPipelineMultisampleStateCreateInfo multisampleInfo;
+		VkPipelineColorBlendAttachmentState colorBlendAttachment;
+		VkPipelineColorBlendStateCreateInfo colorBlendInfo;
+		VkPipelineDepthStencilStateCreateInfo depthStencilInfo;
+		VkPipelineLayout pipelineLayout = nullptr;
+		VkRenderPass renderPass = nullptr;
+		uint32_t subpass = 0;
 	};
 
 	class VE_Pipeline
@@ -17,12 +29,12 @@ namespace LVE {
 			const std::string& fragFilepath,
 			const PipelineConfigInfo& configInfo);
 
-		~VE_Pipeline() {}
+		~VE_Pipeline();
 
 		VE_Pipeline(const VE_Pipeline&) = delete;
 		void operator= (const VE_Pipeline&) = delete;
 
-		static PipelineConfigInfo defaultPiplelineConfigInfo(uint32_t width, uint32_t height);
+		static PipelineConfigInfo defaultPipelineConfigInfo(uint32_t width, uint32_t height);
 
 	private:
 		static std::vector<char> readFile(const std::string& filepath);
@@ -35,7 +47,7 @@ namespace LVE {
 		void createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule);
 
 		VE_Device& _veDevice;
-		VkPipeline _graphicPipeline;
+		VkPipeline _graphicsPipeline;
 		VkShaderModule _vertShaderModule;
 		VkShaderModule _fragShaderModule;
 	};
