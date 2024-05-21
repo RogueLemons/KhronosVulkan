@@ -33,7 +33,7 @@ namespace LVE {
 
         // Not copyable or movable
         VE_Device(const VE_Device&) = delete;
-        void operator=(const VE_Device&) = delete;
+        VE_Device& operator=(const VE_Device&) = delete;
         VE_Device(VE_Device&&) = delete;
         VE_Device& operator=(VE_Device&&) = delete;
 

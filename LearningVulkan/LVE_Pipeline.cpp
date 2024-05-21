@@ -19,10 +19,8 @@ namespace LVE {
         vkDestroyPipeline(_veDevice.device(), _graphicsPipeline, nullptr);
     }
 
-    PipelineConfigInfo VE_Pipeline::defaultPipelineConfigInfo(uint32_t width, uint32_t height)
+    void VE_Pipeline::defaultPipelineConfigInfo(PipelineConfigInfo& configInfo, uint32_t width, uint32_t height)
     {
-        PipelineConfigInfo configInfo{};
-
         configInfo.inputAssemblyInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
         configInfo.inputAssemblyInfo.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
         configInfo.inputAssemblyInfo.primitiveRestartEnable = VK_FALSE;
@@ -88,8 +86,6 @@ namespace LVE {
         configInfo.depthStencilInfo.stencilTestEnable = VK_FALSE;
         configInfo.depthStencilInfo.front = {};  // Optional
         configInfo.depthStencilInfo.back = {};   // Optional
-
-        return configInfo;
     }
 
     std::vector<char> VE_Pipeline::readFile(const std::string& filepath)
