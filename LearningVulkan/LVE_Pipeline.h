@@ -31,9 +31,9 @@ namespace LVE {
 		~VE_Pipeline();
 
 		VE_Pipeline(const VE_Pipeline&) = delete;
-		void operator= (const VE_Pipeline&) = delete;
+		VE_Pipeline& operator= (const VE_Pipeline&) = delete;
 
-		static PipelineConfigInfo defaultPipelineConfigInfo(uint32_t width, uint32_t height);
+		static void defaultPipelineConfigInfo(PipelineConfigInfo& configInfo, uint32_t width, uint32_t height);
 
 	private:
 		static std::vector<char> readFile(const std::string& filepath);

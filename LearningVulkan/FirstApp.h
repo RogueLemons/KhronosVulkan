@@ -2,6 +2,9 @@
 #include "LVE_Window.h"
 #include "LVE_Pipeline.h"
 #include "LVE_Device.h"
+#include "LVE_SwapChain.h"
+#include <memory>
+#include <vector>
 
 namespace LVE {
 
@@ -10,14 +13,25 @@ namespace LVE {
 		static constexpr int WIDTH = 800;
 		static constexpr int HEIGHT = 600;
 
+		FirstApp();
+		~FirstApp();
+		FirstApp(const FirstApp&) = delete;
+		FirstApp& operator= (const FirstApp&) = delete;
+
 		void run();
 
 	private:
+		void createPipelineLayout();
+		void createPipeline();
+		void createCommandBuffers();
+		void drawFrame();
+
 		VE_Window _veWindow{ WIDTH, HEIGHT, "Hello Vulkan!" };
 		VE_Device _veDevice{ _veWindow };
-
-		// These paths only work when debugging
-		VE_Pipeline _vePipeline{ _veDevice, "shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv", VE_Pipeline::defaultPipelineConfigInfo(WIDTH, HEIGHT) };
+		VE_SwapChain _veSwapChain{ _veDevice, _veWindow.getExtent() };
+		std::unique_ptr<VE_Pipeline> _vePipeline;
+		VkPipelineLayout _pipelineLayout;
+		std::vector<VkCommandBuffer> _commandBuffers;
 	};
 
 }

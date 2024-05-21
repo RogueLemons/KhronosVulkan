@@ -33,6 +33,9 @@
     <ClCompile Include="LVE_Device.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LVE_SwapChain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LVE_Pipeline.h">
@@ -45,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LVE_Device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LVE_SwapChain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
