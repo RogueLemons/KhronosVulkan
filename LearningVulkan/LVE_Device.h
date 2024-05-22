@@ -23,9 +23,9 @@ namespace LVE {
     class VE_Device {
     public:
 #ifdef NDEBUG
-        const bool enableValidationLayers = false;
+        const bool _enableValidationLayers = false;
 #else
-        const bool enableValidationLayers = true;
+        const bool _enableValidationLayers = true;
 #endif
 
         VE_Device(VE_Window& window);
@@ -37,15 +37,15 @@ namespace LVE {
         VE_Device(VE_Device&&) = delete;
         VE_Device& operator=(VE_Device&&) = delete;
 
-        VkCommandPool getCommandPool() { return commandPool; }
-        VkDevice device() { return device_; }
-        VkSurfaceKHR surface() { return surface_; }
-        VkQueue graphicsQueue() { return graphicsQueue_; }
-        VkQueue presentQueue() { return presentQueue_; }
+        VkCommandPool getCommandPool() { return _commandPool; }
+        VkDevice device() { return _device_; }
+        VkSurfaceKHR surface() { return _surface_; }
+        VkQueue graphicsQueue() { return _graphicsQueue_; }
+        VkQueue presentQueue() { return _presentQueue_; }
 
-        SwapChainSupportDetails getSwapChainSupport() { return querySwapChainSupport(physicalDevice); }
+        SwapChainSupportDetails getSwapChainSupport() { return querySwapChainSupport(_physicalDevice); }
         uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
-        QueueFamilyIndices findPhysicalQueueFamilies() { return findQueueFamilies(physicalDevice); }
+        QueueFamilyIndices findPhysicalQueueFamilies() { return findQueueFamilies(_physicalDevice); }
         VkFormat findSupportedFormat(
             const std::vector<VkFormat>& candidates, VkImageTiling tiling, VkFormatFeatureFlags features);
 
@@ -68,7 +68,7 @@ namespace LVE {
             VkImage& image,
             VkDeviceMemory& imageMemory);
 
-        VkPhysicalDeviceProperties properties;
+        VkPhysicalDeviceProperties _properties;
 
     private:
         void createInstance();
@@ -88,19 +88,19 @@ namespace LVE {
         bool checkDeviceExtensionSupport(VkPhysicalDevice device);
         SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
 
-        VkInstance instance;
-        VkDebugUtilsMessengerEXT debugMessenger;
-        VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-        VE_Window& window;
-        VkCommandPool commandPool;
+        VkInstance _instance;
+        VkDebugUtilsMessengerEXT _debugMessenger;
+        VkPhysicalDevice _physicalDevice = VK_NULL_HANDLE;
+        VE_Window& _window;
+        VkCommandPool _commandPool;
 
-        VkDevice device_;
-        VkSurfaceKHR surface_;
-        VkQueue graphicsQueue_;
-        VkQueue presentQueue_;
+        VkDevice _device_;
+        VkSurfaceKHR _surface_;
+        VkQueue _graphicsQueue_;
+        VkQueue _presentQueue_;
 
-        const std::vector<const char*> validationLayers = { "VK_LAYER_KHRONOS_validation" };
-        const std::vector<const char*> deviceExtensions = { VK_KHR_SWAPCHAIN_EXTENSION_NAME };
+        const std::vector<const char*> _validationLayers = { "VK_LAYER_KHRONOS_validation" };
+        const std::vector<const char*> _deviceExtensions = { VK_KHR_SWAPCHAIN_EXTENSION_NAME };
     };
 
 }  // namespace lve

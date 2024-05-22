@@ -21,11 +21,11 @@ namespace LVE {
         VE_SwapChain(const VE_SwapChain&) = delete;
         void operator=(const VE_SwapChain&) = delete;
 
-        VkFramebuffer getFrameBuffer(int index) { return swapChainFramebuffers[index]; }
-        VkRenderPass getRenderPass() { return renderPass; }
-        VkImageView getImageView(int index) { return swapChainImageViews[index]; }
-        size_t imageCount() { return swapChainImages.size(); }
-        VkFormat getSwapChainImageFormat() { return swapChainImageFormat; }
+        VkFramebuffer getFrameBuffer(int index) { return _swapChainFramebuffers[index]; }
+        VkRenderPass getRenderPass() { return _renderPass; }
+        VkImageView getImageView(int index) { return _swapChainImageViews[index]; }
+        size_t imageCount() { return _swapChainImages.size(); }
+        VkFormat getSwapChainImageFormat() { return _swapChainImageFormat; }
         VkExtent2D getSwapChainExtent() { return swapChainExtent; }
         uint32_t width() { return swapChainExtent.width; }
         uint32_t height() { return swapChainExtent.height; }
@@ -53,28 +53,28 @@ namespace LVE {
             const std::vector<VkPresentModeKHR>& availablePresentModes);
         VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 
-        VkFormat swapChainImageFormat;
+        VkFormat _swapChainImageFormat;
         VkExtent2D swapChainExtent;
 
-        std::vector<VkFramebuffer> swapChainFramebuffers;
-        VkRenderPass renderPass;
+        std::vector<VkFramebuffer> _swapChainFramebuffers;
+        VkRenderPass _renderPass;
 
-        std::vector<VkImage> depthImages;
-        std::vector<VkDeviceMemory> depthImageMemorys;
-        std::vector<VkImageView> depthImageViews;
-        std::vector<VkImage> swapChainImages;
-        std::vector<VkImageView> swapChainImageViews;
+        std::vector<VkImage> _depthImages;
+        std::vector<VkDeviceMemory> _depthImageMemorys;
+        std::vector<VkImageView> _depthImageViews;
+        std::vector<VkImage> _swapChainImages;
+        std::vector<VkImageView> _swapChainImageViews;
 
-        VE_Device& device;
-        VkExtent2D windowExtent;
+        VE_Device& _device;
+        VkExtent2D _windowExtent;
 
-        VkSwapchainKHR swapChain;
+        VkSwapchainKHR _swapChain;
 
-        std::vector<VkSemaphore> imageAvailableSemaphores;
-        std::vector<VkSemaphore> renderFinishedSemaphores;
-        std::vector<VkFence> inFlightFences;
-        std::vector<VkFence> imagesInFlight;
-        size_t currentFrame = 0;
+        std::vector<VkSemaphore> _imageAvailableSemaphores;
+        std::vector<VkSemaphore> _renderFinishedSemaphores;
+        std::vector<VkFence> _inFlightFences;
+        std::vector<VkFence> _imagesInFlight;
+        size_t _currentFrame = 0;
     };
 
-}  // namespace lve
+}  // namespace LVE
