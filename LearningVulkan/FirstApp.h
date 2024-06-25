@@ -3,6 +3,7 @@
 #include "LVE_Pipeline.h"
 #include "LVE_Device.h"
 #include "LVE_SwapChain.h"
+#include "LVE_Model.h"
 #include <memory>
 #include <vector>
 
@@ -21,6 +22,7 @@ namespace LVE {
 		void run();
 
 	private:
+		void loadModels();
 		void createPipelineLayout();
 		void createPipeline();
 		void createCommandBuffers();
@@ -32,6 +34,7 @@ namespace LVE {
 		std::unique_ptr<VE_Pipeline> _vePipeline;
 		VkPipelineLayout _pipelineLayout;
 		std::vector<VkCommandBuffer> _commandBuffers;
+		std::unique_ptr<VE_Model> _veModel;
 	};
 
 }
