@@ -178,7 +178,7 @@ namespace LVE {
         vkGetSwapchainImagesKHR(_device.device(), _swapChain, &imageCount, _swapChainImages.data());
 
         _swapChainImageFormat = surfaceFormat.format;
-        swapChainExtent = extent;
+        _swapChainExtent = extent;
     }
 
     void VE_SwapChain::createImageViews() {

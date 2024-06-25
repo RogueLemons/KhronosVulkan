@@ -26,12 +26,12 @@ namespace LVE {
         VkImageView getImageView(int index) { return _swapChainImageViews[index]; }
         size_t imageCount() { return _swapChainImages.size(); }
         VkFormat getSwapChainImageFormat() { return _swapChainImageFormat; }
-        VkExtent2D getSwapChainExtent() { return swapChainExtent; }
-        uint32_t width() { return swapChainExtent.width; }
-        uint32_t height() { return swapChainExtent.height; }
+        VkExtent2D getSwapChainExtent() { return _swapChainExtent; }
+        uint32_t width() { return _swapChainExtent.width; }
+        uint32_t height() { return _swapChainExtent.height; }
 
         float extentAspectRatio() {
-            return static_cast<float>(swapChainExtent.width) / static_cast<float>(swapChainExtent.height);
+            return static_cast<float>(_swapChainExtent.width) / static_cast<float>(_swapChainExtent.height);
         }
         VkFormat findDepthFormat();
 
@@ -54,7 +54,7 @@ namespace LVE {
         VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 
         VkFormat _swapChainImageFormat;
-        VkExtent2D swapChainExtent;
+        VkExtent2D _swapChainExtent;
 
         std::vector<VkFramebuffer> _swapChainFramebuffers;
         VkRenderPass _renderPass;
