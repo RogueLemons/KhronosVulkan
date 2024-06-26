@@ -26,11 +26,14 @@ namespace LVE {
 		void createPipelineLayout();
 		void createPipeline();
 		void createCommandBuffers();
+		void freeCommandBuffers();
 		void drawFrame();
+		void recreateSwapChain();
+		void recordCommandBuffer(int imageIndex);
 
 		VE_Window _veWindow{ WIDTH, HEIGHT, "Hello Vulkan!" };
 		VE_Device _veDevice{ _veWindow };
-		VE_SwapChain _veSwapChain{ _veDevice, _veWindow.getExtent() };
+		std::unique_ptr<VE_SwapChain> _veSwapChain;
 		std::unique_ptr<VE_Pipeline> _vePipeline;
 		VkPipelineLayout _pipelineLayout;
 		std::vector<VkCommandBuffer> _commandBuffers;
