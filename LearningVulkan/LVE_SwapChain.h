@@ -19,7 +19,7 @@ namespace LVE {
         ~VE_SwapChain();
 
         VE_SwapChain(const VE_SwapChain&) = delete;
-        void operator=(const VE_SwapChain&) = delete;
+        VE_SwapChain& operator=(const VE_SwapChain&) = delete;
 
         VkFramebuffer getFrameBuffer(int index) { return _swapChainFramebuffers[index]; }
         VkRenderPass getRenderPass() { return _renderPass; }
