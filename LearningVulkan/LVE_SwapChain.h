@@ -8,6 +8,7 @@
 // std lib headers
 #include <string>
 #include <vector>
+#include <memory>
 
 namespace LVE {
 
@@ -16,6 +17,7 @@ namespace LVE {
         static constexpr int MAX_FRAMES_IN_FLIGHT = 2;
 
         VE_SwapChain(VE_Device& deviceRef, VkExtent2D windowExtent);
+        VE_SwapChain(VE_Device& deviceRef, VkExtent2D windowExtent, std::shared_ptr<VE_SwapChain> previous);
         ~VE_SwapChain();
 
         VE_SwapChain(const VE_SwapChain&) = delete;
@@ -39,6 +41,7 @@ namespace LVE {
         VkResult submitCommandBuffers(const VkCommandBuffer* buffers, uint32_t* imageIndex);
 
     private:
+        void init();
         void createSwapChain();
         void createImageViews();
         void createDepthResources();
@@ -47,10 +50,8 @@ namespace LVE {
         void createSyncObjects();
 
         // Helper functions
-        VkSurfaceFormatKHR chooseSwapSurfaceFormat(
-            const std::vector<VkSurfaceFormatKHR>& availableFormats);
-        VkPresentModeKHR chooseSwapPresentMode(
-            const std::vector<VkPresentModeKHR>& availablePresentModes);
+        VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
+        VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
         VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 
         VkFormat _swapChainImageFormat;
@@ -69,6 +70,7 @@ namespace LVE {
         VkExtent2D _windowExtent;
 
         VkSwapchainKHR _swapChain;
+        std::shared_ptr<VE_SwapChain> _oldSwapChain;
 
         std::vector<VkSemaphore> _imageAvailableSemaphores;
         std::vector<VkSemaphore> _renderFinishedSemaphores;

@@ -11,14 +11,28 @@
 
 namespace LVE {
 
-    VE_SwapChain::VE_SwapChain(VE_Device& deviceRef, VkExtent2D extent)
-        : _device{ deviceRef }, _windowExtent{ extent } {
+    void VE_SwapChain::init() {
         createSwapChain();
         createImageViews();
         createRenderPass();
         createDepthResources();
         createFramebuffers();
         createSyncObjects();
+    }
+    
+    VE_SwapChain::VE_SwapChain(VE_Device& deviceRef, VkExtent2D extent)
+        : _device{ deviceRef }
+        , _windowExtent{ extent } {
+        init();
+    }
+
+    VE_SwapChain::VE_SwapChain(VE_Device& deviceRef, VkExtent2D extent, std::shared_ptr<VE_SwapChain> previous)
+        : _device{ deviceRef }
+        , _windowExtent{ extent }
+        , _oldSwapChain{ previous } {
+        init();
+        // Clean up old swap chain since it is no longer needed
+        _oldSwapChain = nullptr;
     }
 
     VE_SwapChain::~VE_SwapChain() {
@@ -163,7 +177,7 @@ namespace LVE {
         createInfo.presentMode = presentMode;
         createInfo.clipped = VK_TRUE;
 
-        createInfo.oldSwapchain = VK_NULL_HANDLE;
+        createInfo.oldSwapchain = _oldSwapChain == nullptr ? VK_NULL_HANDLE : _oldSwapChain->_swapChain;
 
         if (vkCreateSwapchainKHR(_device.device(), &createInfo, nullptr, &_swapChain) != VK_SUCCESS) {
             throw std::runtime_error("failed to create swap chain!");
