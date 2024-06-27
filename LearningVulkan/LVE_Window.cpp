@@ -3,26 +3,26 @@
 
 namespace LVE {
 
-	VE_Window::VE_Window(int width, int height, std::string name)
+	LVE_Window::LVE_Window(int width, int height, std::string name)
 		: _width(width), _height(height), _windowName(name)
 	{
 		initWindow();
 	}
 
-	VE_Window::~VE_Window()
+	LVE_Window::~LVE_Window()
 	{
 		glfwDestroyWindow(_window);
 		glfwTerminate();
 	}
 
-	void VE_Window::createWindowSurface(VkInstance instance, VkSurfaceKHR* surface)
+	void LVE_Window::createWindowSurface(VkInstance instance, VkSurfaceKHR* surface)
 	{
 		if (glfwCreateWindowSurface(instance, _window, nullptr, surface) != VK_SUCCESS) {
 			throw std::runtime_error("Failed to create window surface.");
 		}
 	}
 
-	void VE_Window::initWindow()
+	void LVE_Window::initWindow()
 	{
 		glfwInit();
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
@@ -33,12 +33,12 @@ namespace LVE {
 		glfwSetFramebufferSizeCallback(_window, framebufferResizeCallback);
 	}
 
-	void VE_Window::framebufferResizeCallback(GLFWwindow* window, int width, int height)
+	void LVE_Window::framebufferResizeCallback(GLFWwindow* window, int width, int height)
 	{
-		auto veWindow = reinterpret_cast<VE_Window*>(glfwGetWindowUserPointer(window));
-		veWindow->_frameBufferResized = true;
-		veWindow->_width = width;
-		veWindow->_height = height;
+		auto lveWindow = reinterpret_cast<LVE_Window*>(glfwGetWindowUserPointer(window));
+		lveWindow->_frameBufferResized = true;
+		lveWindow->_width = width;
+		lveWindow->_height = height;
 	}
 
 }

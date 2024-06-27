@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClCompile Include="FirstApp.cpp" />
     <ClCompile Include="LVE_Device.cpp" />
+    <ClCompile Include="LVE_GameObject.cpp" />
     <ClCompile Include="LVE_Model.cpp" />
     <ClCompile Include="LVE_Pipeline.cpp" />
     <ClCompile Include="LVE_SwapChain.cpp" />
@@ -151,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LVE_Device.h" />
+    <ClInclude Include="LVE_GameObject.h" />
     <ClInclude Include="LVE_Model.h" />
     <ClInclude Include="LVE_Pipeline.h" />
     <ClInclude Include="LVE_SwapChain.h" />

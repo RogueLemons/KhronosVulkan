@@ -31,13 +31,13 @@ namespace LVE {
 		void recreateSwapChain();
 		void recordCommandBuffer(int imageIndex);
 
-		VE_Window _veWindow{ WIDTH, HEIGHT, "Hello Vulkan!" };
-		VE_Device _veDevice{ _veWindow };
-		std::unique_ptr<VE_SwapChain> _veSwapChain;
-		std::unique_ptr<VE_Pipeline> _vePipeline;
+		LVE_Window _lveWindow{ WIDTH, HEIGHT, "Hello Vulkan!" };
+		LVE_Device _lveDevice{ _lveWindow };
+		std::unique_ptr<LVE_SwapChain> _lveSwapChain;
+		std::unique_ptr<LVE_Pipeline> _lvePipeline;
 		VkPipelineLayout _pipelineLayout;
 		std::vector<VkCommandBuffer> _commandBuffers;
-		std::unique_ptr<VE_Model> _veModel;
+		std::unique_ptr<LVE_Model> _lveModel;
 	};
 
 }

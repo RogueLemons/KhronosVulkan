@@ -20,7 +20,7 @@ namespace LVE {
         bool isComplete() { return graphicsFamilyHasValue && presentFamilyHasValue; }
     };
 
-    class VE_Device {
+    class LVE_Device {
     public:
 #ifdef NDEBUG
         const bool _enableValidationLayers = false;
@@ -28,14 +28,14 @@ namespace LVE {
         const bool _enableValidationLayers = true;
 #endif
 
-        VE_Device(VE_Window& window);
-        ~VE_Device();
+        LVE_Device(LVE_Window& window);
+        ~LVE_Device();
 
         // Not copyable or movable
-        VE_Device(const VE_Device&) = delete;
-        VE_Device& operator=(const VE_Device&) = delete;
-        VE_Device(VE_Device&&) = delete;
-        VE_Device& operator=(VE_Device&&) = delete;
+        LVE_Device(const LVE_Device&) = delete;
+        LVE_Device& operator=(const LVE_Device&) = delete;
+        LVE_Device(LVE_Device&&) = delete;
+        LVE_Device& operator=(LVE_Device&&) = delete;
 
         VkCommandPool getCommandPool() { return _commandPool; }
         VkDevice device() { return _device_; }
@@ -90,7 +90,7 @@ namespace LVE {
         VkInstance _instance;
         VkDebugUtilsMessengerEXT _debugMessenger;
         VkPhysicalDevice _physicalDevice = VK_NULL_HANDLE;
-        VE_Window& _window;
+        LVE_Window& _window;
         VkCommandPool _commandPool;
 
         VkDevice _device_;
