@@ -2,7 +2,6 @@
 #include <iostream>
 #include <stdexcept>
 
-// VE - VulkanEngine
 // LVE - LittleVulkanEngine
 
 int main() {

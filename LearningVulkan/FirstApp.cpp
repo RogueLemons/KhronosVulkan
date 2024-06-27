@@ -23,27 +23,27 @@ namespace LVE {
 
 	FirstApp::~FirstApp()
 	{
-		vkDestroyPipelineLayout(_veDevice.device(), _pipelineLayout, nullptr);
+		vkDestroyPipelineLayout(_lveDevice.device(), _pipelineLayout, nullptr);
 	}
 
 	void FirstApp::run()
 	{
-		while (!_veWindow.shouldClose()) {
+		while (!_lveWindow.shouldClose()) {
 			glfwPollEvents();
 			drawFrame();
 		}
 
-		vkDeviceWaitIdle(_veDevice.device());
+		vkDeviceWaitIdle(_lveDevice.device());
 	}
 
 	void FirstApp::loadModels()
 	{
-		std::vector<VE_Model::Vertex> vertices{
+		std::vector<LVE_Model::Vertex> vertices{
 			{ { 0.0f, -0.5f },	{ 1.0f, 0.0f, 0.0f } },
 			{ { 0.5f, 0.5f },	{ 0.0f, 1.0f, 0.0f } },
 			{ { -0.5f, 0.5f },	{ 0.0f, 0.0f, 1.0f } },
 		};
-		_veModel = std::make_unique<VE_Model>(_veDevice, vertices);
+		_lveModel = std::make_unique<LVE_Model>(_lveDevice, vertices);
 	}
 
 	void FirstApp::createPipelineLayout()
@@ -59,49 +59,49 @@ namespace LVE {
 		pipelineLayoutInfo.pSetLayouts = nullptr;
 		pipelineLayoutInfo.pushConstantRangeCount = 1;
 		pipelineLayoutInfo.pPushConstantRanges = &pushConstantRange;
-		if (vkCreatePipelineLayout(_veDevice.device(), &pipelineLayoutInfo, nullptr, &_pipelineLayout) != VK_SUCCESS) {
+		if (vkCreatePipelineLayout(_lveDevice.device(), &pipelineLayoutInfo, nullptr, &_pipelineLayout) != VK_SUCCESS) {
 			throw std::runtime_error("Failed to create pipeline layout");
 		}
 	}
 
 	void FirstApp::createPipeline()
 	{
-		assert(_veSwapChain != nullptr && "Cannot create pipeline before swap chain.");
+		assert(_lveSwapChain != nullptr && "Cannot create pipeline before swap chain.");
 		assert(_pipelineLayout != nullptr && "Cannot create pipeline before pipeline layout.");
 
 		PipelineConfigInfo pipelineConfig{};
-		VE_Pipeline::defaultPipelineConfigInfo(pipelineConfig);
-		pipelineConfig.renderPass = _veSwapChain->getRenderPass();
+		LVE_Pipeline::defaultPipelineConfigInfo(pipelineConfig);
+		pipelineConfig.renderPass = _lveSwapChain->getRenderPass();
 		pipelineConfig.pipelineLayout = _pipelineLayout;
 		// These paths only work when debugging. TODO: Add auto-compile and file copy post-build events
-		_vePipeline = std::make_unique<VE_Pipeline>(_veDevice, "shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv", pipelineConfig);
+		_lvePipeline = std::make_unique<LVE_Pipeline>(_lveDevice, "shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv", pipelineConfig);
 	}
 
 	void FirstApp::createCommandBuffers()
 	{
-		_commandBuffers.resize(_veSwapChain->imageCount());
+		_commandBuffers.resize(_lveSwapChain->imageCount());
 
 		VkCommandBufferAllocateInfo allocInfo{};
 		allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
 		allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-		allocInfo.commandPool = _veDevice.getCommandPool();
+		allocInfo.commandPool = _lveDevice.getCommandPool();
 		allocInfo.commandBufferCount = static_cast<uint32_t>(_commandBuffers.size());
 
-		if (vkAllocateCommandBuffers(_veDevice.device(), &allocInfo, _commandBuffers.data()) != VK_SUCCESS) {
+		if (vkAllocateCommandBuffers(_lveDevice.device(), &allocInfo, _commandBuffers.data()) != VK_SUCCESS) {
 			throw std::runtime_error("Failed to allocate command buffers");
 		}
 	}
 
 	void FirstApp::freeCommandBuffers()
 	{
-		vkFreeCommandBuffers(_veDevice.device(), _veDevice.getCommandPool(), static_cast<uint32_t>(_commandBuffers.size()), _commandBuffers.data());
+		vkFreeCommandBuffers(_lveDevice.device(), _lveDevice.getCommandPool(), static_cast<uint32_t>(_commandBuffers.size()), _commandBuffers.data());
 		_commandBuffers.clear();
 	}
 
 	void FirstApp::drawFrame()
 	{
 		uint32_t imageIndex;
-		auto result = _veSwapChain->acquireNextImage(&imageIndex);
+		auto result = _lveSwapChain->acquireNextImage(&imageIndex);
 
 		if (result == VK_ERROR_OUT_OF_DATE_KHR) {
 			recreateSwapChain();
@@ -113,10 +113,10 @@ namespace LVE {
 		}
 
 		recordCommandBuffer(imageIndex);
-		result = _veSwapChain->submitCommandBuffers(&_commandBuffers[imageIndex], &imageIndex);
+		result = _lveSwapChain->submitCommandBuffers(&_commandBuffers[imageIndex], &imageIndex);
 
-		if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || _veWindow.wasWindowResized()) {
-			_veWindow.resetWindowResizedFlag();
+		if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || _lveWindow.wasWindowResized()) {
+			_lveWindow.resetWindowResizedFlag();
 			recreateSwapChain();
 			return;
 		}
@@ -128,19 +128,19 @@ namespace LVE {
 
 	void FirstApp::recreateSwapChain()
 	{
-		auto extent = _veWindow.getExtent();
+		auto extent = _lveWindow.getExtent();
 		while (extent.width == 0 || extent.height == 0) {
-			extent = _veWindow.getExtent();
+			extent = _lveWindow.getExtent();
 			glfwWaitEvents();
 		}
-		vkDeviceWaitIdle(_veDevice.device());
+		vkDeviceWaitIdle(_lveDevice.device());
 
-		if (_veSwapChain == nullptr) {
-			_veSwapChain = std::make_unique<VE_SwapChain>(_veDevice, extent);
+		if (_lveSwapChain == nullptr) {
+			_lveSwapChain = std::make_unique<LVE_SwapChain>(_lveDevice, extent);
 		}
 		else {
-			_veSwapChain = std::make_unique<VE_SwapChain>(_veDevice, extent, std::move(_veSwapChain));
-			if (_veSwapChain->imageCount() != _commandBuffers.size()) {
+			_lveSwapChain = std::make_unique<LVE_SwapChain>(_lveDevice, extent, std::move(_lveSwapChain));
+			if (_lveSwapChain->imageCount() != _commandBuffers.size()) {
 				freeCommandBuffers();
 				createCommandBuffers();
 			}
@@ -163,11 +163,11 @@ namespace LVE {
 
 		VkRenderPassBeginInfo renderPassInfo{};
 		renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-		renderPassInfo.renderPass = _veSwapChain->getRenderPass();
-		renderPassInfo.framebuffer = _veSwapChain->getFrameBuffer(imageIndex);
+		renderPassInfo.renderPass = _lveSwapChain->getRenderPass();
+		renderPassInfo.framebuffer = _lveSwapChain->getFrameBuffer(imageIndex);
 
 		renderPassInfo.renderArea.offset = { 0, 0 };
-		renderPassInfo.renderArea.extent = _veSwapChain->getSwapChainExtent();
+		renderPassInfo.renderArea.extent = _lveSwapChain->getSwapChainExtent();
 
 		std::array<VkClearValue, 2> clearValues{};
 		clearValues[0].color = { 0.01f, 0.01f, 0.01f, 1.0f };
@@ -180,16 +180,16 @@ namespace LVE {
 		VkViewport viewport{};
 		viewport.x = 0.0f;
 		viewport.y = 0.0f;
-		viewport.width = static_cast<float>(_veSwapChain->getSwapChainExtent().width);
-		viewport.height = static_cast<float>(_veSwapChain->getSwapChainExtent().height);
+		viewport.width = static_cast<float>(_lveSwapChain->getSwapChainExtent().width);
+		viewport.height = static_cast<float>(_lveSwapChain->getSwapChainExtent().height);
 		viewport.minDepth = 0.0f;
 		viewport.maxDepth = 1.0f;
-		VkRect2D scissor{ {0, 0}, _veSwapChain->getSwapChainExtent() };
+		VkRect2D scissor{ {0, 0}, _lveSwapChain->getSwapChainExtent() };
 		vkCmdSetViewport(_commandBuffers[imageIndex], 0, 1, &viewport);
 		vkCmdSetScissor(_commandBuffers[imageIndex], 0, 1, &scissor);
 
-		_vePipeline->bind(_commandBuffers[imageIndex]);
-		_veModel->bind(_commandBuffers[imageIndex]);
+		_lvePipeline->bind(_commandBuffers[imageIndex]);
+		_lveModel->bind(_commandBuffers[imageIndex]);
 
 		for (int j = 0; j < 4; j++) {
 			SimplePushConstantData push{};
@@ -205,7 +205,7 @@ namespace LVE {
 				&push
 			);
 
-			_veModel->draw(_commandBuffers[imageIndex]);
+			_lveModel->draw(_commandBuffers[imageIndex]);
 		}
 
 		vkCmdEndRenderPass(_commandBuffers[imageIndex]);

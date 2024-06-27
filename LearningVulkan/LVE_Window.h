@@ -6,13 +6,13 @@
 
 namespace LVE {
 
-	class VE_Window
+	class LVE_Window
 	{
 	public:
-		VE_Window(int width, int height, std::string name);
-		~VE_Window();
-		VE_Window(const VE_Window&) = delete;
-		VE_Window& operator= (const VE_Window&) = delete;
+		LVE_Window(int width, int height, std::string name);
+		~LVE_Window();
+		LVE_Window(const LVE_Window&) = delete;
+		LVE_Window& operator= (const LVE_Window&) = delete;
 
 		bool shouldClose() { return glfwWindowShouldClose(_window); }
 		VkExtent2D getExtent() { return { static_cast<uint32_t>(_width), static_cast<uint32_t>(_height) }; }

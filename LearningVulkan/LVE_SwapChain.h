@@ -12,16 +12,16 @@
 
 namespace LVE {
 
-    class VE_SwapChain {
+    class LVE_SwapChain {
     public:
         static constexpr int MAX_FRAMES_IN_FLIGHT = 2;
 
-        VE_SwapChain(VE_Device& deviceRef, VkExtent2D windowExtent);
-        VE_SwapChain(VE_Device& deviceRef, VkExtent2D windowExtent, std::shared_ptr<VE_SwapChain> previous);
-        ~VE_SwapChain();
+        LVE_SwapChain(LVE_Device& deviceRef, VkExtent2D windowExtent);
+        LVE_SwapChain(LVE_Device& deviceRef, VkExtent2D windowExtent, std::shared_ptr<LVE_SwapChain> previous);
+        ~LVE_SwapChain();
 
-        VE_SwapChain(const VE_SwapChain&) = delete;
-        VE_SwapChain& operator=(const VE_SwapChain&) = delete;
+        LVE_SwapChain(const LVE_SwapChain&) = delete;
+        LVE_SwapChain& operator=(const LVE_SwapChain&) = delete;
 
         VkFramebuffer getFrameBuffer(int index) { return _swapChainFramebuffers[index]; }
         VkRenderPass getRenderPass() { return _renderPass; }
@@ -66,11 +66,11 @@ namespace LVE {
         std::vector<VkImage> _swapChainImages;
         std::vector<VkImageView> _swapChainImageViews;
 
-        VE_Device& _device;
+        LVE_Device& _lveDevice;
         VkExtent2D _windowExtent;
 
         VkSwapchainKHR _swapChain;
-        std::shared_ptr<VE_SwapChain> _oldSwapChain;
+        std::shared_ptr<LVE_SwapChain> _oldSwapChain;
 
         std::vector<VkSemaphore> _imageAvailableSemaphores;
         std::vector<VkSemaphore> _renderFinishedSemaphores;

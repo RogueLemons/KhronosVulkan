@@ -7,25 +7,25 @@
 
 namespace LVE {
 
-    VE_Pipeline::VE_Pipeline(VE_Device& device, const std::string& vertFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo)
-        : _veDevice(device)
+    LVE_Pipeline::LVE_Pipeline(LVE_Device& device, const std::string& vertFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo)
+        : _lveDevice(device)
     {
         createGraphicsPipeline(vertFilepath, fragFilepath, configInfo);
     }
 
-    VE_Pipeline::~VE_Pipeline()
+    LVE_Pipeline::~LVE_Pipeline()
     {
-        vkDestroyShaderModule(_veDevice.device(), _vertShaderModule, nullptr);
-        vkDestroyShaderModule(_veDevice.device(), _fragShaderModule, nullptr);
-        vkDestroyPipeline(_veDevice.device(), _graphicsPipeline, nullptr);
+        vkDestroyShaderModule(_lveDevice.device(), _vertShaderModule, nullptr);
+        vkDestroyShaderModule(_lveDevice.device(), _fragShaderModule, nullptr);
+        vkDestroyPipeline(_lveDevice.device(), _graphicsPipeline, nullptr);
     }
 
-    void VE_Pipeline::bind(VkCommandBuffer commandBuffer)
+    void LVE_Pipeline::bind(VkCommandBuffer commandBuffer)
     {
         vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, _graphicsPipeline);
     }
 
-    void VE_Pipeline::defaultPipelineConfigInfo(PipelineConfigInfo& configInfo)
+    void LVE_Pipeline::defaultPipelineConfigInfo(PipelineConfigInfo& configInfo)
     {
         configInfo.inputAssemblyInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
         configInfo.inputAssemblyInfo.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
@@ -96,7 +96,7 @@ namespace LVE {
         configInfo.dynamicStateInfo.flags = 0;
     }
 
-    std::vector<char> VE_Pipeline::readFile(const std::string& filepath)
+    std::vector<char> LVE_Pipeline::readFile(const std::string& filepath)
     {
         std::ifstream file(filepath, std::ios::ate | std::ios::binary);
         if (!file.is_open()) {
@@ -112,7 +112,7 @@ namespace LVE {
         return buffer;
     }
 
-    void VE_Pipeline::createGraphicsPipeline(const std::string& vertFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo)
+    void LVE_Pipeline::createGraphicsPipeline(const std::string& vertFilepath, const std::string& fragFilepath, const PipelineConfigInfo& configInfo)
     {
         assert(configInfo.pipelineLayout != VK_NULL_HANDLE &&
                "Cannot create graphics pipeline:: no pipelineLayout provided in configInfo");
@@ -141,8 +141,8 @@ namespace LVE {
         shaderStages[1].pNext = nullptr;
         shaderStages[1].pSpecializationInfo = nullptr;
 
-        auto bindingDescriptions = VE_Model::Vertex::getBindingDescriptions();
-        auto attributeDescriptions = VE_Model::Vertex::getAttributeDescriptions();
+        auto bindingDescriptions = LVE_Model::Vertex::getBindingDescriptions();
+        auto attributeDescriptions = LVE_Model::Vertex::getAttributeDescriptions();
         VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
         vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
         vertexInputInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(attributeDescriptions.size());
@@ -170,20 +170,20 @@ namespace LVE {
         pipelineInfo.basePipelineIndex = -1;
         pipelineInfo.basePipelineHandle = VK_NULL_HANDLE;
 
-        if (vkCreateGraphicsPipelines(_veDevice.device(), VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &_graphicsPipeline) != VK_SUCCESS) {
+        if (vkCreateGraphicsPipelines(_lveDevice.device(), VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &_graphicsPipeline) != VK_SUCCESS) {
             throw std::runtime_error("Failed to create graphics pipeline");
         }
 
     }
 
-    void VE_Pipeline::createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule)
+    void LVE_Pipeline::createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule)
     {
         VkShaderModuleCreateInfo createInfo{};
         createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
         createInfo.codeSize = code.size();
         createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
 
-        if (vkCreateShaderModule(_veDevice.device(), &createInfo, nullptr, shaderModule) != VK_SUCCESS) {
+        if (vkCreateShaderModule(_lveDevice.device(), &createInfo, nullptr, shaderModule) != VK_SUCCESS) {
             throw std::runtime_error("Failed to create shader module");
         }
     }

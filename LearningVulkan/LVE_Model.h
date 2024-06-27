@@ -8,7 +8,7 @@
 
 namespace LVE {
 	
-	class VE_Model
+	class LVE_Model
 	{
 	public:
 
@@ -20,10 +20,10 @@ namespace LVE {
 			static std::vector<VkVertexInputAttributeDescription> getAttributeDescriptions();
 		};
 
-		VE_Model(VE_Device& device, const std::vector<Vertex>& vertices);
-		~VE_Model();
-		VE_Model(const VE_Model&) = delete;
-		VE_Model& operator= (const VE_Model&) = delete;
+		LVE_Model(LVE_Device& device, const std::vector<Vertex>& vertices);
+		~LVE_Model();
+		LVE_Model(const LVE_Model&) = delete;
+		LVE_Model& operator= (const LVE_Model&) = delete;
 
 		void bind(VkCommandBuffer commandBuffer);
 		void draw(VkCommandBuffer commandBuffer);
@@ -31,7 +31,7 @@ namespace LVE {
 	private:
 		void createVertexBuffers(const std::vector<Vertex>& vertices);
 
-		VE_Device& _veDevice;
+		LVE_Device& _lveDevice;
 		VkBuffer _vertexBuffer;
 		VkDeviceMemory _vertexBufferMemory;
 		uint32_t _vertexCount;

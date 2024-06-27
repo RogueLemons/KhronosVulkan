@@ -24,19 +24,19 @@ namespace LVE {
 		uint32_t subpass = 0;
 	};
 
-	class VE_Pipeline
+	class LVE_Pipeline
 	{
 	public:
-		VE_Pipeline(
-			VE_Device& device,
+		LVE_Pipeline(
+			LVE_Device& device,
 			const std::string& vertFilepath,
 			const std::string& fragFilepath,
 			const PipelineConfigInfo& configInfo);
 
-		~VE_Pipeline();
+		~LVE_Pipeline();
 
-		VE_Pipeline(const VE_Pipeline&) = delete;
-		VE_Pipeline& operator= (const VE_Pipeline&) = delete;
+		LVE_Pipeline(const LVE_Pipeline&) = delete;
+		LVE_Pipeline& operator= (const LVE_Pipeline&) = delete;
 
 		void bind(VkCommandBuffer commandBuffer);
 
@@ -52,7 +52,7 @@ namespace LVE {
 
 		void createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule);
 
-		VE_Device& _veDevice;
+		LVE_Device& _lveDevice;
 		VkPipeline _graphicsPipeline;
 		VkShaderModule _vertShaderModule;
 		VkShaderModule _fragShaderModule;
