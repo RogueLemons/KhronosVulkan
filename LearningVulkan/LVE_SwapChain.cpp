@@ -85,8 +85,7 @@ namespace LVE {
         return result;
     }
 
-    VkResult VE_SwapChain::submitCommandBuffers(
-        const VkCommandBuffer* buffers, uint32_t* imageIndex) {
+    VkResult VE_SwapChain::submitCommandBuffers(const VkCommandBuffer* buffers, uint32_t* imageIndex) {
         if (_imagesInFlight[*imageIndex] != VK_NULL_HANDLE) {
             vkWaitForFences(_device.device(), 1, &_imagesInFlight[*imageIndex], VK_TRUE, UINT64_MAX);
         }
