@@ -54,7 +54,6 @@ namespace LVE {
 		LVE_Pipeline::defaultPipelineConfigInfo(pipelineConfig);
 		pipelineConfig.renderPass = renderPass;
 		pipelineConfig.pipelineLayout = _pipelineLayout;
-		// These paths only work when debugging. TODO: Add auto-compile and file copy post-build events
 		_lvePipeline = std::make_unique<LVE_Pipeline>(_lveDevice, "shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv", pipelineConfig);
 	}
 
