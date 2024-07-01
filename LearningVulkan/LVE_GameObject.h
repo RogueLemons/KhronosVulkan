@@ -4,6 +4,11 @@
 
 namespace LVE {
 
+	struct RigidBody2dComponent {
+		glm::vec2 velocity;
+		float mass{1.0f};
+	};
+
 	struct Transform2dComponent {
 		glm::vec2 translation{}; // (position offset)
 		glm::vec2 scale{ 1.0f, 1.0f };
@@ -39,6 +44,7 @@ namespace LVE {
 		std::shared_ptr<LVE_Model> _model{};
 		glm::vec3 _color{};
 		Transform2dComponent _transform2d{};
+		RigidBody2dComponent _rigidBody2d{};
 
 	private:
 		LVE_GameObject(id_t objId) : _id(objId) {  };
