@@ -146,18 +146,22 @@
     <ClCompile Include="LVE_GameObject.cpp" />
     <ClCompile Include="LVE_Model.cpp" />
     <ClCompile Include="LVE_Pipeline.cpp" />
+    <ClCompile Include="LVE_Renderer.cpp" />
     <ClCompile Include="LVE_SwapChain.cpp" />
     <ClCompile Include="LVE_Window.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SimpleRenderSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LVE_Device.h" />
     <ClInclude Include="LVE_GameObject.h" />
     <ClInclude Include="LVE_Model.h" />
     <ClInclude Include="LVE_Pipeline.h" />
+    <ClInclude Include="LVE_Renderer.h" />
     <ClInclude Include="LVE_SwapChain.h" />
     <ClInclude Include="LVE_Window.h" />
     <ClInclude Include="FirstApp.h" />
+    <ClInclude Include="SimpleRenderSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\compile.bat" />
