@@ -1,5 +1,6 @@
 #include "FirstApp.h"
 #include "SimpleRenderSystem.h"
+#include "LVE_Camera.h"
 #include <stdexcept>
 #include <array>
 #include <cassert>
@@ -21,13 +22,18 @@ namespace LVE {
 	void FirstApp::run()
 	{
 		SimpleRenderSystem simpleRenderSystem(_lveDevice, _lveRenderer.getSwapChainRenderPass());
+        LVE_Camera camera{};
 
 		while (!_lveWindow.shouldClose()) {
 			glfwPollEvents();
+            
+            float aspect = _lveRenderer.getAspectRatio();
+            // camera.setOrthographicProjection(-aspect, aspect, -1, 1, -1, 1);
+            camera.setPerspectiveProjection(glm::radians(50.0f), aspect, 0.1f, 10.0f);
 			
 			if (auto commandBuffer = _lveRenderer.beginFrame()) {
 				_lveRenderer.beginSwapChainRenderPass(commandBuffer);
-				simpleRenderSystem.renderGameObjects(commandBuffer, _gameObjects);
+				simpleRenderSystem.renderGameObjects(commandBuffer, _gameObjects, camera);
 				_lveRenderer.endSwapChainRenderPass(commandBuffer);
 				_lveRenderer.endFrame();
 			}
@@ -102,7 +108,7 @@ namespace LVE {
 
         auto cube = LVE_GameObject::createGameObject();
         cube._model = lveModel;
-        cube._transform.translation = { 0.0f, 0.0f, 0.5f };
+        cube._transform.translation = { 0.0f, 0.0f, 2.5f };
         cube._transform.scale = { 0.5f, 0.5f, 0.5f };
 
         _gameObjects.push_back(std::move(cube));
