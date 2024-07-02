@@ -23,6 +23,7 @@ namespace LVE {
 	{
 		SimpleRenderSystem simpleRenderSystem(_lveDevice, _lveRenderer.getSwapChainRenderPass());
         LVE_Camera camera{};
+        camera.setViewDirection(glm::vec3(0.0f), glm::vec3(0.5f, 0.0f, 1.0f));
 
 		while (!_lveWindow.shouldClose()) {
 			glfwPollEvents();
