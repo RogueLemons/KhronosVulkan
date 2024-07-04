@@ -32,7 +32,7 @@ namespace LVE {
 		if (glfwGetKey(window, keys.moveDown) == GLFW_PRESS) moveDir -= upDir;
 
 		if (glm::dot(moveDir, moveDir) > std::numeric_limits<float>::epsilon()) {
-			gameObject._transform.rotation += lookSpeed * dt * glm::normalize(moveDir);
+			gameObject._transform.translation += moveSpeed * dt * glm::normalize(moveDir);
 		}
 	}
 
