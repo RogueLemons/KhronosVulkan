@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FirstApp.cpp" />
+    <ClCompile Include="KeyboardMovementController.cpp" />
     <ClCompile Include="LVE_Camera.cpp" />
     <ClCompile Include="LVE_Device.cpp" />
     <ClCompile Include="LVE_GameObject.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="SimpleRenderSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="KeyboardMovementController.h" />
     <ClInclude Include="LVE_Camera.h" />
     <ClInclude Include="LVE_Device.h" />
     <ClInclude Include="LVE_GameObject.h" />
