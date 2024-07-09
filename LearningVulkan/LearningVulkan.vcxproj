@@ -177,6 +177,7 @@ $(SolutionDir)shaders\compile.bat $(TargetDir)
     <ClInclude Include="LVE_Pipeline.h" />
     <ClInclude Include="LVE_Renderer.h" />
     <ClInclude Include="LVE_SwapChain.h" />
+    <ClInclude Include="LVE_Utils.hpp" />
     <ClInclude Include="LVE_Window.h" />
     <ClInclude Include="FirstApp.h" />
     <ClInclude Include="SimpleRenderSystem.h" />
