@@ -159,6 +159,8 @@ $(SolutionDir)shaders\compile.bat $(TargetDir)
     <ClCompile Include="KeyboardMovementController.cpp" />
     <ClCompile Include="LVE_Buffer.cpp" />
     <ClCompile Include="LVE_Camera.cpp" />
+    <ClCompile Include="LVE_Descriptors.cpp" />
+    <ClCompile Include="LVE_Descriptors.h" />
     <ClCompile Include="LVE_Device.cpp" />
     <ClCompile Include="LVE_GameObject.cpp" />
     <ClCompile Include="LVE_Model.cpp" />
