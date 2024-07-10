@@ -3,6 +3,7 @@
 #include "LVE_Device.h"
 #include "LVE_GameObject.h"
 #include "LVE_Renderer.h"
+#include "LVE_Descriptors.h"
 #include <memory>
 #include <vector>
 
@@ -27,6 +28,8 @@ namespace LVE {
 		LVE_Device _lveDevice{ _lveWindow };
 		LVE_Renderer _lveRenderer{ _lveWindow, _lveDevice };
 
+		// Note: order of declarations matters
+		std::unique_ptr<LVE_DescriptorPool> _globalPool{};
 		std::vector<LVE_GameObject> _gameObjects;
 	};
 
