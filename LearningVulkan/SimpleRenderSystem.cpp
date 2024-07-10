@@ -56,11 +56,11 @@ namespace LVE {
 		_lvePipeline = std::make_unique<LVE_Pipeline>(_lveDevice, "shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv", pipelineConfig);
 	}
 
-	void SimpleRenderSystem::renderGameObjects(VkCommandBuffer commandBuffer, std::vector<LVE_GameObject>& gameObjects, const LVE_Camera& camera)
+	void SimpleRenderSystem::renderGameObjects(FrameInfo& frameInfo, std::vector<LVE_GameObject>& gameObjects)
 	{
-		_lvePipeline->bind(commandBuffer);
+		_lvePipeline->bind(frameInfo.commandBuffer);
 
-		auto projectionView = camera.getProjection() * camera.getView();
+		auto projectionView = frameInfo.camera.getProjection() * frameInfo.camera.getView();
 
 		for (auto& obj : gameObjects) {
 			SimplePushConstantData push{};
@@ -69,7 +69,7 @@ namespace LVE {
 			push.normalMatrix = obj._transform.normalMatrix();
 
 			vkCmdPushConstants(
-				commandBuffer,
+				frameInfo.commandBuffer,
 				_pipelineLayout,
 				VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
 				0,
@@ -77,8 +77,8 @@ namespace LVE {
 				&push
 			);
 
-			obj._model->bind(commandBuffer);
-			obj._model->draw(commandBuffer);
+			obj._model->bind(frameInfo.commandBuffer);
+			obj._model->draw(frameInfo.commandBuffer);
 		}
 	}
 

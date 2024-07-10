@@ -3,6 +3,7 @@
 #include "LVE_Device.h"
 #include "LVE_GameObject.h"
 #include "LVE_Camera.h"
+#include "LVE_FrameInfo.hpp"
 #include <memory>
 #include <vector>
 
@@ -15,7 +16,7 @@ namespace LVE {
 		SimpleRenderSystem(const SimpleRenderSystem&) = delete;
 		SimpleRenderSystem& operator= (const SimpleRenderSystem&) = delete;
 
-		void renderGameObjects(VkCommandBuffer commandBuffer, std::vector<LVE_GameObject>& gameObjects, const LVE_Camera& camera);
+		void renderGameObjects(FrameInfo& frameInfo, std::vector<LVE_GameObject>& gameObjects);
 
 	private:
 		void createPipelineLayout();
