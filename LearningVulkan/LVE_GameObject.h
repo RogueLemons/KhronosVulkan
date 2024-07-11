@@ -1,6 +1,7 @@
 #pragma once
 #include "LVE_Model.h"
 #include <memory>
+#include <unordered_map>
 
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -19,6 +20,7 @@ namespace LVE {
 	{
 	public:
 		using id_t = unsigned int;
+		using Map = std::unordered_map<id_t, LVE_GameObject>;
 
 		static LVE_GameObject createGameObject() {
 			static id_t currentId = 0;
