@@ -49,7 +49,7 @@ namespace LVE {
 		}
 
 		auto globalSetLayout = LVE_DescriptorSetLayout::Builder(_lveDevice)
-			.addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT)
+			.addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_ALL_GRAPHICS)
 			.build();
 
 		std::vector<VkDescriptorSet> globalDescriptorSets(LVE_SwapChain::MAX_FRAMES_IN_FLIGHT);
@@ -85,7 +85,7 @@ namespace LVE {
 			
 			if (auto commandBuffer = _lveRenderer.beginFrame()) {
 				int frameIndex = _lveRenderer.getFrameIndex();
-				FrameInfo frameInfo{ frameIndex, frameTime, commandBuffer, camera, globalDescriptorSets[frameIndex] };
+				FrameInfo frameInfo{ frameIndex, frameTime, commandBuffer, camera, globalDescriptorSets[frameIndex], _gameObjects };
 
 				// Update
 				GlobalUbo ubo{};
@@ -95,7 +95,7 @@ namespace LVE {
 
 				// Render
 				_lveRenderer.beginSwapChainRenderPass(commandBuffer);
-				simpleRenderSystem.renderGameObjects(frameInfo, _gameObjects);
+				simpleRenderSystem.renderGameObjects(frameInfo);
 				_lveRenderer.endSwapChainRenderPass(commandBuffer);
 				_lveRenderer.endFrame();
 			}
@@ -112,21 +112,21 @@ namespace LVE {
 		flatVase._model = lveModel;
 		flatVase._transform.translation = { -0.5f, 0.5f, 0.0f };
 		flatVase._transform.scale = { 3.0f, 1.5f, 3.0f };
-		_gameObjects.push_back(std::move(flatVase));
+		_gameObjects.emplace(flatVase.getId(), std::move(flatVase));
 
 		lveModel = LVE_Model::createModelFromFile(_lveDevice, "models/smooth_vase.obj");
 		auto smoothVase = LVE_GameObject::createGameObject();
 		smoothVase._model = lveModel;
 		smoothVase._transform.translation = { 0.5f, 0.5f, 0.0f };
 		smoothVase._transform.scale = { 3.0f, 1.5f, 3.0f };
-		_gameObjects.push_back(std::move(smoothVase));
+		_gameObjects.emplace(smoothVase.getId(), std::move(smoothVase));
 
 		lveModel = LVE_Model::createModelFromFile(_lveDevice, "models/quad.obj");
 		auto floor = LVE_GameObject::createGameObject();
 		floor._model = lveModel;
 		floor._transform.translation = { 0.0f, 0.5f, 0.0f };
 		floor._transform.scale = { 3.0f, 1.0f, 3.0f };
-		_gameObjects.push_back(std::move(floor));
+		_gameObjects.emplace(floor.getId(), std::move(floor));
 	}
 
 }
