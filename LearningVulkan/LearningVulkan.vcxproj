@@ -115,7 +115,7 @@
     </Link>
     <PreBuildEvent>
       <Command>if not exist "$(TargetDir)models" mkdir "$(TargetDir)models"
-xcopy /s "$(ProjectDir)models" "$(TargetDir)models"
+xcopy /f /y "$(ProjectDir)models" "$(TargetDir)models"
 $(SolutionDir)shaders\compile.bat $(TargetDir)
 </Command>
     </PreBuildEvent>
@@ -145,7 +145,7 @@ $(SolutionDir)shaders\compile.bat $(TargetDir)
     </Link>
     <PreBuildEvent>
       <Command>if not exist "$(TargetDir)models" mkdir "$(TargetDir)models"
-xcopy /s "$(ProjectDir)models" "$(TargetDir)models"
+xcopy /f /y "$(ProjectDir)models" "$(TargetDir)models"
 $(SolutionDir)shaders\compile.bat $(TargetDir)
 </Command>
     </PreBuildEvent>
@@ -169,6 +169,7 @@ $(SolutionDir)shaders\compile.bat $(TargetDir)
     <ClCompile Include="LVE_SwapChain.cpp" />
     <ClCompile Include="LVE_Window.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PointLightSystem.cpp" />
     <ClCompile Include="SimpleRenderSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -185,10 +186,13 @@ $(SolutionDir)shaders\compile.bat $(TargetDir)
     <ClInclude Include="LVE_Utils.hpp" />
     <ClInclude Include="LVE_Window.h" />
     <ClInclude Include="FirstApp.h" />
+    <ClInclude Include="PointLightSystem.h" />
     <ClInclude Include="SimpleRenderSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\compile.bat" />
+    <None Include="shaders\point_light.frag" />
+    <None Include="shaders\point_light.vert" />
     <None Include="shaders\simple_shader.frag" />
     <None Include="shaders\simple_shader.vert" />
   </ItemGroup>

@@ -5,6 +5,8 @@ echo Shader compilation
 set currentDir=%0\..
 glslc.exe %currentDir%\simple_shader.vert -o %currentDir%\simple_shader.vert.spv
 glslc.exe %currentDir%\simple_shader.frag -o %currentDir%\simple_shader.frag.spv
+glslc.exe %currentDir%\point_light.vert -o %currentDir%\point_light.vert.spv
+glslc.exe %currentDir%\point_light.frag -o %currentDir%\point_light.frag.spv
 
 if [%1] == [] (
 	pause 
@@ -14,3 +16,5 @@ set shaderBuildDir=%1\shaders
 if not exist %shaderBuildDir% mkdir %shaderBuildDir%
 xcopy /f /y %currentDir%\simple_shader.vert.spv %shaderBuildDir%
 xcopy /f /y %currentDir%\simple_shader.frag.spv %shaderBuildDir%
+xcopy /f /y %currentDir%\point_light.vert.spv %shaderBuildDir%
+xcopy /f /y %currentDir%\point_light.frag.spv %shaderBuildDir%
