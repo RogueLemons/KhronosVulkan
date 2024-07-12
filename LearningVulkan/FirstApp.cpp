@@ -15,14 +15,6 @@
 #include <glm/gtc/constants.hpp>
 
 namespace LVE {
-
-	struct GlobalUbo {
-		glm::mat4 projection{ 1.0f };
-		glm::mat4 view{ 1.0f };
-		glm::vec4 ambientLightColor{ 1.0f, 1.0f, 1.0f, 0.02f }; // w is intensity
-		glm::vec3 lightPosition{ -1.0f };
-		alignas(16) glm::vec4 lightColor{ 1.0f };				// w is light intensity
-	};
 	
 	FirstApp::FirstApp()
 	{
@@ -94,6 +86,7 @@ namespace LVE {
 				GlobalUbo ubo{};
 				ubo.projection = camera.getProjection();
 				ubo.view = camera.getView();
+				pointLightSystem.update(frameInfo, ubo);
 				uboBuffers[frameIndex]->writeToBuffer(&ubo);
 				uboBuffers[frameIndex]->flush();
 
@@ -132,6 +125,13 @@ namespace LVE {
 		floor._transform.translation = { 0.0f, 0.5f, 0.0f };
 		floor._transform.scale = { 3.0f, 1.0f, 3.0f };
 		_gameObjects.emplace(floor.getId(), std::move(floor));
+
+		{	// using pointLight again is invalid
+			auto pointLight = LVE_GameObject::creatPointLight(0.2f);
+			_gameObjects.emplace(pointLight.getId(), std::move(pointLight));
+		}
+
+
 	}
 
 }
