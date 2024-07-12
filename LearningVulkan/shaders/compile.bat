@@ -14,7 +14,4 @@ if [%1] == [] (
 )
 set shaderBuildDir=%1\shaders
 if not exist %shaderBuildDir% mkdir %shaderBuildDir%
-xcopy /f /y %currentDir%\simple_shader.vert.spv %shaderBuildDir%
-xcopy /f /y %currentDir%\simple_shader.frag.spv %shaderBuildDir%
-xcopy /f /y %currentDir%\point_light.vert.spv %shaderBuildDir%
-xcopy /f /y %currentDir%\point_light.frag.spv %shaderBuildDir%
+xcopy /f /y %currentDir%\*.spv %shaderBuildDir%
