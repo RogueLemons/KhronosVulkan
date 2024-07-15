@@ -93,8 +93,11 @@ namespace LVE {
 
 				// Render
 				_lveRenderer.beginSwapChainRenderPass(commandBuffer);
+
+				// order here matters
 				simpleRenderSystem.renderGameObjects(frameInfo);
 				pointLightSystem.render(frameInfo);
+
 				_lveRenderer.endSwapChainRenderPass(commandBuffer);
 				_lveRenderer.endFrame();
 			}
