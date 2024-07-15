@@ -63,11 +63,18 @@ namespace LVE {
 
 	void PointLightSystem::update(FrameInfo& frameInfo, GlobalUbo& ubo)
 	{
+		auto rotateLight = glm::rotate(glm::mat4(1.0f), frameInfo.frameTime, { 0.0f, -1.0f, 0.0f });
+
 		int lightIndex = 0;
 		for (auto& kv : frameInfo.gameObjects) {
 			auto& obj = kv.second;
 			if (obj._pointLight == nullptr)
 				continue;
+
+			assert(lightIndex < MAX_LIGHTS && "Point lights exceed maximum specified.");
+
+			// update light position
+			obj._transform.translation = glm::vec3(rotateLight * glm::vec4(obj._transform.translation, 1.0f));
 
 			// copy light to ubo
 			ubo.pointLights[lightIndex].position = glm::vec4(obj._transform.translation, 1.0f);

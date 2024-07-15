@@ -126,11 +126,26 @@ namespace LVE {
 		floor._transform.scale = { 3.0f, 1.0f, 3.0f };
 		_gameObjects.emplace(floor.getId(), std::move(floor));
 
-		{	// using pointLight again is invalid
+		std::vector<glm::vec3> lightColors{
+			{1.f, .1f, .1f},
+			{.1f, .1f, 1.f},
+			{.1f, 1.f, .1f},
+			{1.f, 1.f, .1f},
+			{.1f, 1.f, 1.f},
+			{1.f, 1.f, 1.f}  //
+		};
+
+		for (int i = 0; i < lightColors.size(); i++) {
 			auto pointLight = LVE_GameObject::creatPointLight(0.2f);
+			pointLight._color = lightColors[i];
+			auto rotateLight = glm::rotate(
+				glm::mat4(1.0f),
+				(i * glm::two_pi<float>()) / lightColors.size(),
+				{ 0.0f, -1.0f, 0.0f }
+			);
+			pointLight._transform.translation = glm::vec3(rotateLight * glm::vec4(-1.0f, -1.0f, -1.0f, 1.0f));
 			_gameObjects.emplace(pointLight.getId(), std::move(pointLight));
 		}
-
 
 	}
 
