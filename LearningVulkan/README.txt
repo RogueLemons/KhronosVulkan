@@ -1,4 +1,6 @@
 === README ===
+Two demos ready to run are included in the demos folder.
+
 To change the code and build the application the following steps must be performed: 
 https://vulkan-tutorial.com/en/Development_environment#page_Windows
 
