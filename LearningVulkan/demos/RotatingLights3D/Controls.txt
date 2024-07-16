@@ -1,0 +1,3 @@
+wasd   - move forward/back/left/right
+qe     - up/down
+arrows - look around

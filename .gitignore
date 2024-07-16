@@ -211,5 +211,6 @@ $RECYCLE.BIN/
 /LearningVulkan/.vs/
 /.vs
 
-# include models
+# include models and demos
 !/LearningVulkan/models/*
+!/LearningVulkan/demos/*
