@@ -54,6 +54,18 @@
     <ClCompile Include="KeyboardMovementController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LVE_Buffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LVE_Descriptors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LVE_Descriptors.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLightSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LVE_Pipeline.h">
@@ -89,6 +101,18 @@
     <ClInclude Include="KeyboardMovementController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LVE_Buffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LVE_FrameInfo.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LVE_Utils.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLightSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\simple_shader.frag">
@@ -98,6 +122,12 @@
       <Filter>shaders</Filter>
     </None>
     <None Include="shaders\compile.bat">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\point_light.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\point_light.vert">
       <Filter>shaders</Filter>
     </None>
   </ItemGroup>
