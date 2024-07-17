@@ -214,3 +214,6 @@ $RECYCLE.BIN/
 # include models
 !/LearningVulkan/models/*
 !/LearningVulkan/demos/RotatingLights3D/models/*
+
+# VkGuideZip
+/VkGuide/vulkan-guide-all-chapters-2.zip
